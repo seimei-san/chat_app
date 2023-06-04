@@ -17,11 +17,7 @@
   --red-light: #ffaab6;
   --green-light: #95ffdc;
 
-  /* typography */
-  --headingFont: "Inconsolata", monospace;
-  --bodyFont: "Montserrat", sans-serif;
-  --smallText: 0.7em;
-  /* 残り */
+
   --backgroundColor: var(--grey-50);
   --textColor: var(--grey-1000);
   --borderRadius: 0.25rem;
@@ -29,12 +25,9 @@
   --transition: 0.3s ease-in-out all;
   --max-width: 1280px;
   --fixed-width: 600px;
-  /* box-shadow */
-  --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-3: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --stardard-margin: 5px;
+  --chat-padding: 10px;
+
 }
 
 * {
@@ -55,6 +48,7 @@ body {
   font-weight: 400;
   line-height: 1.75;
   width: var(--max-width);
+  color: white;
 }
 
 header {
@@ -63,26 +57,89 @@ header {
   width: 470px;
   height: 75px;
   place-items: center;
+
 }
+
 head > p {
   font-size: 5px;
+}
+.user_name {
+  margin: var(--stardard-margin);
+  width: 150px;
+  height: 30px;
+}
+.user_chat {
+  margin: var(--stardard-margin);
 }
 .chat {
   width: 650px;
   height: 100px;
-  margin: auto;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
+
+.btn_submit {
+  height: 30px;
+  width:  80px;
+}
+
+
 .chats_container {
-  padding: ;
   margin: auto;
   width: 650px;
   height: 710px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
 }
+
+
+.my_chat_left {
+  /* text-align: left; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: var(--stardard-margin);
+}
+
+.others_chat_right {
+  /* text-align: right; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: var(--stardard-margin);
+}
+
+.chat_id {
+  height: 20px;
+  width: 100px;
+  /* visibility: hidden; */
+  margin: var(--stardard-margin);
+  
+}
+.user_id {
+  height: 20px;
+  width: 100px;
+  margin: var(--stardard-margin);
+}
+.chat_time {
+  height: 20px;
+  width: 100px;
+  margin: var(--stardard-margin);
+}
+
+.chatted {
+  width: fit-content;
+  margin: var(--stardard-margin);
+  padding: var(--chat-padding);
+  background-color: rgba(0, 0, 255, 0.349);
+}
+
 footer {
   height: 25px;
   width: 800px;
   margin: auto;
   color: white;
   text-align: center;
-  padding: 3px;
 }
