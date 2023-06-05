@@ -1,66 +1,66 @@
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved, onValue } 
+from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+import env from "./env.js";
+
+const firebaseConfig = {
+  apiKey: env.firebaseConfigEnv.apiKey,
+  authDomain: env.firebaseConfigEnv.authDomain,
+  databaseURL: env.firebaseConfigEnv.databaseURL,
+  projectId: env.firebaseConfigEnv.projectId,
+  storageBucket: env.firebaseConfigEnv.storageBucket,
+  messagingSenderId: env.firebaseConfigEnv.messagingSenderId,
+  appId: env.firebaseConfigEnv.appId
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db  = getDatabase(firebaseApp); //RealtimeDBに接続
+const dbRef = ref(db,"chats"); //RealtimeDB内の"chat"を使う
+
 const app = Vue.createApp({
   data: () => ({
-    user_name: "seimei",
-    user_chat: "hoge hoge",
-    chat_time: "",
+    user_name: "",
+    user_chat: "",
     chat_id: "",
-    user_id: "",
-    user_chatted: "",
-    chats: [
-      {
-        chat_id: "123445",
-        chat_time: "10:10",
-        user_id: "seimei",
-        user_chatted: "hoge hoge hoge hoges"
-     },  
-     {
-      chat_id: "4561894sdf",
-      chat_time: "12:30",
-      user_id: "hogehoge",
-      user_chatted: "hoge hoge hoge hoges"
-      }
-    ]
-    
+    chat_time: "",
+    chat_user_name: "",
+    chat_user_chat: "",
+    chats: [],
 
   }),
+  mounted: function () {
+    onValue(dbRef, (chatting) => {
+      // this.chats = JSON.parse(chatting.val());
+      this.chats = chatting.val();
+      let html = ""
+      for (const key in this.chats) {
+          this.chat_id = key;
+          this.chat_user_name = this.chats[key].chat_user_name;
+          this.chat_user_chat = this.chats[key].chat_user_chat;
+          this.chat_time = this.chats[key].chat_time;
+          if (this.chat_user_name === this.user_name) {
+            html += `<li class="my_chat_left"><div class="chat_info"><span class="chat_time">${this.chat_time}</span><span class="chat_user_name">${this.chat_user_name}</span><span class="chat_id">${this.chat_id}</span></div><div class="chat_my_chat">${this.chat_user_chat}</div></li>`
+          } else {
+            html += `<li class="others_chat_right"><div class="chat_info"><span class="chat_id">${this.chat_id}</span><span class="chat_time">${this.chat_time}</span><span class="chat_user_name">${this.chat_user_name}</span></div><div class="chat_others_chat">${this.chat_user_chat}</div></li>`
+          }
+      }
+      const chatListDOM = document.querySelector(".chat_list");
+      chatListDOM.innerHTML = html;
+    });
+  },
+
   methods: {
     btn_send: function() {
-      console.log('click btn')
-      this.showChats();
+      const now = new Date();
+      const chatting = {
+        chat_user_name: this.user_name,
+        chat_user_chat: this.user_chat,
+        chat_time: now.getFullYear() + "/" + now.getMonth() + "/" + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
+      }
+      const newPostRef = push(dbRef);
+      set(newPostRef, chatting);
     },
-  showChats () {
-    const chatsDOM = document.querySelector(".chat_list");
-    try {
-      // const { data: chats }= await axios.get("/api/v1/chats");
-      // if (chats.length < 1) {
-      //   chatsDOM.innerHTML = `<h5 class="empty-list">メモは、ありません。</h5>`;
-      //   return
-      // }
-      const allChats = this.chats.map((chat) => {
-        console.log(this.chats);
-        console.log(chat);
-        this.chat_id = chat.chat_id;
-        console.log(this.chat_id);
-        this.user_id = chat.user_id;
-        this.chat_time = chat.chat_time;
-        this.user_chatted = chat.user_chatted;
-        if (this.user_id == this.user_name) {
-          console.log('RIGHT');
-        return `<li class="my_chat_left"><div class="chat_info"><span class="chat_time">${this.chat_time}</span><span class="user_id">${this.user_id}</span><span class="chat_id">${this.chat_id}</span></div><div class="chatted">${this.user_chatted}</div></li>` 
-        } else {
-          console.log('LEFT');
-          return `<li class="others_chat_right"><div class="chat_info"><span class="chat_id">${this.chat_id}</span><span class="chat_time">${this.chat_time}</span><span class="user_id">${this.user_id}</span></div><div class="chatted">${this.user_chatted}</div></li>`
-        }
-      })
-      .join("");
-      console.log(allChats);
-      chatsDOM.innerHTML = allChats;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-
   }
 })
 app.mount("#app")

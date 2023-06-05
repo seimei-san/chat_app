@@ -118,7 +118,7 @@ head > p {
   margin: var(--stardard-margin);
   
 }
-.user_id {
+.chat_user_name {
   height: 20px;
   width: 100px;
   margin: var(--stardard-margin);
@@ -129,11 +129,18 @@ head > p {
   margin: var(--stardard-margin);
 }
 
-.chatted {
+.chat_my_chat {
   width: fit-content;
   margin: var(--stardard-margin);
   padding: var(--chat-padding);
-  background-color: rgba(0, 0, 255, 0.349);
+  background-color: rgba(40, 141, 116, 0.685);
+}
+
+.chat_others_chat {
+  width: fit-content;
+  margin: var(--stardard-margin);
+  padding: var(--chat-padding);
+  background-color: rgba(168, 51, 129, 0.678);
 }
 
 footer {
