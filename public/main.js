@@ -47,6 +47,7 @@ const app = Vue.createApp({
       }
       const chatListDOM = document.querySelector(".chat_list");
       chatListDOM.innerHTML = html;
+      chatListDOM.scrollTo = chatListDOM.scrollHeight;
     });
   },
 
