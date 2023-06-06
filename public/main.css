@@ -49,6 +49,10 @@ body {
   line-height: 1.75;
   width: var(--max-width);
   color: white;
+  font-size: 18px;
+}
+h1 {
+  color: green;
 }
 
 header {
@@ -60,6 +64,7 @@ header {
 
 }
 
+
 head > p {
   font-size: 5px;
 }
@@ -67,13 +72,15 @@ head > p {
   margin: var(--stardard-margin);
   width: 150px;
   height: 30px;
+  font-size: 18px;
 }
 .user_chat {
   margin: var(--stardard-margin);
+  font-size: 18px;
 }
 .chat {
   width: 650px;
-  height: 100px;
+  height: 80px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -88,7 +95,7 @@ head > p {
 .chats_container {
   margin: auto;
   width: 650px;
-  height: 710px;
+  height: 730px;
   overflow-y: scroll;
   overflow-x: hidden;
   
@@ -133,14 +140,14 @@ head > p {
   width: fit-content;
   margin: var(--stardard-margin);
   padding: var(--chat-padding);
-  background-color: rgba(40, 141, 116, 0.685);
+  background-color: rgba(40, 141, 116, 0.931);
 }
 
 .chat_others_chat {
   width: fit-content;
   margin: var(--stardard-margin);
   padding: var(--chat-padding);
-  background-color: rgba(168, 51, 129, 0.678);
+  background-color: rgba(168, 51, 129, 0.892);
 }
 
 footer {
