@@ -27,13 +27,14 @@
   --fixed-width: 600px;
   --stardard-margin: 5px;
   --chat-padding: 10px;
+  --border-radius: 20px
 
 }
 
 * {
   margin: 0;
   padding: 0;
-  border:  black solid 1px;
+  /* border:  black solid 1px; */
 }
 body {
   background: var(--backgroundColor);
@@ -68,16 +69,31 @@ header {
 head > p {
   font-size: 5px;
 }
+.label_user_name {
+  font-size: 12px;
+}
 .user_name {
   margin: var(--stardard-margin);
-  width: 150px;
+  width: 120px;
   height: 30px;
   font-size: 18px;
 }
 .user_chat {
   margin: var(--stardard-margin);
-  font-size: 18px;
+  font-size: 20px;
+  width: 350px;
 }
+.user_register {
+  width: 650px;
+  height: 80px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.user_register_title {
+  margin-right: 5px;
+}
+
 .chat {
   width: 650px;
   height: 80px;
@@ -86,21 +102,32 @@ head > p {
   align-items: center;
 }
 
-.btn_submit {
+.btn {
   height: 30px;
-  width:  80px;
+  width:  60px;
+  margin: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px #5f5f63;
 }
 
+.btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 2px;
+}
+
+.fa-trash {
+  margin-left: 5px;
+  cursor: pointer;
+}
 
 .chats_container {
   margin: auto;
   width: 650px;
-  height: 730px;
+  height: 740px;
   overflow-y: scroll;
   overflow-x: hidden;
-  
 }
-
 
 .my_chat_left {
   /* text-align: left; */
@@ -121,7 +148,7 @@ head > p {
 .chat_id {
   height: 20px;
   width: 100px;
-  /* visibility: hidden; */
+  visibility: hidden;
   margin: var(--stardard-margin);
   
 }
@@ -141,6 +168,7 @@ head > p {
   margin: var(--stardard-margin);
   padding: var(--chat-padding);
   background-color: rgba(40, 141, 116, 0.931);
+  border-radius: var(--border-radius);
 }
 
 .chat_others_chat {
@@ -148,6 +176,8 @@ head > p {
   margin: var(--stardard-margin);
   padding: var(--chat-padding);
   background-color: rgba(168, 51, 129, 0.892);
+  border-radius: var(--border-radius);
+
 }
 
 footer {

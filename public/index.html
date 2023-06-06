@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link 
+  rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" 
+  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" 
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer" 
+  />  
   <link rel="stylesheet" href="main.css">
 
   <title>チャットだぜ！</title>
@@ -11,28 +18,26 @@
 <body>
   <div id="app">
     <header>
-      <h1>チャットするぜ！</h1>
+      <h1>早打ちチャットだぜ！</h1>
     </header>
-    <div class="chat">
-      <label class="label_user_name" for="user_name">ユーザー</label><input type="text" class="user_name" v-model="user_name"/>
-      <textarea name="user_chat" id="" cols="35" rows="1" class="user_chat" v-model="user_chat">user_chat</textarea>
-      <button type="submit" class="btn_submit" v-on:click="btn_send">送信</button>
+    <div class="user_register" v-if="user_register_box">
+      <span class="user_register_title">挑戦者名を入力しろ！</span>
+      <label class="label_user_name" for="user_name">挑戦者：</label><input type="text" class="user_name" v-model="user_name"/>
+      <button type="button" class="btn btn_register" v-on:click="btn_register">挑戦する</button>
+    </div>
+    <div class="chat" v-if="chat_box">
+      <label class="label_user_name" for="user_name">挑戦者：</label><span class="user_name_disp">{{ user_name }}</span>
+      <!-- <textarea name="user_chat" id="" cols="30" rows="1" class="user_chat" v-model="user_chat" @keydown></textarea> -->
+      <input type="text" class="user_chat" id="" v-model="user_chat" @keydown="onKeyDown">
+      <button type="button" class="btn btn_submit" v-on:click="btn_send">打つ</button>
+      <button type="button" class="btn btn_remove" v-on:click="btn_remove">逃げる</button>
+      <i class="fa fa-trash" v-on:click="btn_trash"></i>
+
 
     </div>
     <div class="chats_container">
-      <ul class="chat_list" style="list-style-type: none">
-        <li class="others_chat_right">
-          <div class="chat_info">
-            <span class="chat_id">1234567</span>
-            <span class="chat_time">10:10</span>
-            <span class="user_id">user_idasdfasdfasdf</span>
-          </div>
-          <div class="chatted">hogehasdfasdfasd<br>fasdfasoge</div>
-        </li>
-
-      </ol>
-
-
+      <ul class="chat_list" style="list-style-type: none" reversed>
+      </ul>
     </div>
     
     <footer>
@@ -41,7 +46,6 @@
   </div>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script type="module" src="main.js"></script>
-  <!-- <script src="../index.js"></script> -->
   
 </body>
 </html>
